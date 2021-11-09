@@ -7,12 +7,13 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText username,password;
+    private TextInputEditText username,password;
     private Button go;
 
     @Override
@@ -20,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        username=findViewById(R.id.input_username);
-        password=findViewById(R.id.text_input_layout_pass);
+        username=findViewById(R.id.f1);
+        password=findViewById(R.id.f2);
         go=findViewById(R.id.btn_go);
         initListeners();
     }
@@ -39,12 +40,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-
+                if (charSequence.length() >= 6 ){
+                    go.setEnabled(true);
+                }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (password.getText().length() >= 5&&editable.length() != 0 ){
+                if (password.getText().length() >= 6&&editable.length() != 0 ){
                     go.setEnabled(true);
                 }else {
                     go.setEnabled(false);
